@@ -1,0 +1,8 @@
+CREATE TABLE autopay_templates
+(
+    id      BIGSERIAL PRIMARY KEY,
+    name    TEXT      NOT NULL,
+    phone   TEXT,
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

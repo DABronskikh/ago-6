@@ -1,0 +1,34 @@
+syntax = "proto3"; // версия proto (по умолчанию - proto2)
+
+package pkg.grpc.fine.v1; // пакет - для операций import'а
+option go_package = "github.com/DABronskikh/ago-6/pkg/fine/v1"; // полный путь пакета для go
+
+import "google/protobuf/timestamp.proto"; // импортируем из другого proto (includes -> third_party)
+
+service AutopayService {// определение сервиса
+  rpc Create (Autopay) returns (Autopay); //создание шаблона
+  rpc FindByAll (AutopaysRequest) returns (AutopayResponse); //получение списка всех шаблонов
+  rpc FindById (AutopayRequestById) returns (Autopay); //получение шаблона по id
+  rpc Update (Autopay) returns (Autopay); //редактирование
+  rpc Delete (Autopay) returns (Autopay); //удаление
+}
+
+message AutopaysRequest {
+  int64 userId = 1;
+}
+
+message AutopayRequestById {
+  int64 autopayId = 1;
+}
+
+message AutopayResponse {
+  repeated Autopay items = 1;
+}
+
+message Autopay {// автоплатеж
+  int64 id = 1;  //id
+  string name = 2;//название
+  string phone = 3;//номер телефона
+  google.protobuf.Timestamp created = 4;//дата создания
+  google.protobuf.Timestamp updated = 5;//дата обновления
+}
